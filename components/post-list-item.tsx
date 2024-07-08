@@ -1,5 +1,6 @@
-import {View, Image, Text, useWindowDimensions} from 'react-native';
+import { View, Image, Text, useWindowDimensions } from 'react-native';
 import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
+
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedImage } from 'cloudinary-react-native';
 // Import required actions and qualifiers.
@@ -30,6 +31,8 @@ export default function PostListItem({ post }) {
         />
         <Text className="font-semibold">{post.user.username}</Text>
       </View>
+
+      {/* Content */}
       <AdvancedImage cldImg={image} className="w-full aspect-[4/3]" />
 
       {/* Icons */}
