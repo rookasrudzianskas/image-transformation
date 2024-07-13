@@ -8,7 +8,7 @@ import { thumbnail } from '@cloudinary/url-gen/actions/resize';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import { focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
 import { FocusOn } from '@cloudinary/url-gen/qualifiers/focusOn';
-import {cld} from "~/lib/cloudinary";
+import { cld } from '~/src/lib/cloudinary';
 
 export default function PostListItem({ post }) {
   const { width } = useWindowDimensions();
@@ -16,7 +16,7 @@ export default function PostListItem({ post }) {
   const image = cld.image(post.image);
   image.resize(thumbnail().width(width).height(width));
 
-  const avatar = cld.image(post.user.avatar_url);
+  const avatar = cld.image(post.user.avatar_url || 'user_rubrec');
   avatar.resize(
     thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
   );
@@ -29,7 +29,9 @@ export default function PostListItem({ post }) {
           cldImg={avatar}
           className="w-12 aspect-square rounded-full"
         />
-        <Text className="font-semibold">{post.user.username}</Text>
+        <Text className="font-semibold">
+          {post.user.username || 'New user'}
+        </Text>
       </View>
 
       {/* Content */}

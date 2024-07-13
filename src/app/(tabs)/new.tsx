@@ -1,15 +1,16 @@
-import {Image, Pressable, Text, TextInput, View} from 'react-native';
-import {useEffect, useState} from "react";
+import { Text, View, Image, TextInput, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
-import Button from "~/components/button";
-import {uploadImage} from "~/lib/cloudinary";
-import {useAuth} from "~/providers/auth-provider";
-import {supabase} from "~/lib/supabase";
-import {router} from "expo-router";
+import Button from '~/src/components/Button';
+import { uploadImage } from '~/src/lib/cloudinary';
+import { supabase } from '~/src/lib/supabase';
+import { useAuth } from '~/src/providers/AuthProvider';
+import { router } from 'expo-router';
 
 export default function CreatePost() {
   const [caption, setCaption] = useState('');
   const [image, setImage] = useState<string | null>(null);
+
   const { session } = useAuth();
 
   useEffect(() => {
@@ -54,7 +55,6 @@ export default function CreatePost() {
     router.push('/(tabs)');
   };
 
-
   return (
     <View className="p-3 items-center flex-1">
       {/* Image picker */}
@@ -67,8 +67,7 @@ export default function CreatePost() {
         <View className="w-52 aspect-[3/4] rounded-lg bg-slate-300" />
       )}
 
-
-      <Text onPress={() => {}} className="text-blue-500 font-semibold m-5">
+      <Text onPress={pickImage} className="text-blue-500 font-semibold m-5">
         Change
       </Text>
 
