@@ -5,7 +5,9 @@ import Button from '~/src/components/Button';
 import { supabase } from '~/src/lib/supabase';
 import {useAuth} from "~/src/providers/AuthProvider";
 import CustomTextInput from "~/src/components/custom-text-input";
-import {uploadImage} from "~/src/lib/cloudinary";
+import {cld, uploadImage} from "~/src/lib/cloudinary";
+import {thumbnail} from "@cloudinary/url-gen/actions/resize";
+import {AdvancedImage} from "cloudinary-react-native";
 
 export default function ProfileScreen() {
   const [image, setImage] = useState<string | null>(null);
