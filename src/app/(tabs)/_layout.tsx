@@ -11,7 +11,10 @@ export default function TabsLayout() {
 
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: 'black', tabBarShowLabel: false }}
+      screenOptions={{
+        tabBarActiveTintColor: 'black',
+        tabBarShowLabel: false,
+      }}
     >
       <Tabs.Screen
         name="index"
@@ -22,7 +25,6 @@ export default function TabsLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
         name="new"
         options={{
@@ -32,7 +34,6 @@ export default function TabsLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
         name="profile"
         options={{
