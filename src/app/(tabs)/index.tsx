@@ -17,16 +17,26 @@ export default function FeedScreen() {
 
   const fetchPosts = async () => {
     setLoading(true);
-    let { data, error } = await supabase
-      .from('posts')
-      .select('*, user:profiles(*)')
-      // .eq('user_id', user?.id) // show only my posts
-      .order('created_at', { ascending: false });
-    if (error) {
-      Alert.alert('Something went wrong');
+    try {
+      let { data, error } = await supabase
+        .from('posts')
+        .select('*, user:profiles(*)')
+        // .eq('user_id', user?.id) // Uncomment this line to show only user's posts
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error(error);
+        Alert.alert('Something went wrong');
+        return;
+      }
+
+      setPosts(data || []);
+    } catch (error) {
+      console.error(error);
+      Alert.alert('An unexpected error occurred');
+    } finally {
+      setLoading(false);
     }
-    setPosts(data);
-    setLoading(false);
   };
 
   return (
