@@ -9,6 +9,7 @@ import PostContent from "~/src/components/post-content";
 import {supabase} from "~/src/lib/supabase";
 import {useEffect, useState} from "react";
 import {useAuth} from "~/src/providers/AuthProvider";
+import {sendLikeNotification} from "~/src/lib/notifications";
 
 export default function PostListItem({ post }) {
   const [isLiked, setIsLiked] = useState(false);
@@ -63,6 +64,8 @@ export default function PostListItem({ post }) {
         .delete()
         .eq('id', likeRecord.id);
       if (!error) {
+        // send notification to the owner of that post
+        sendLikeNotification(data[0]);
         setLikeRecord(null);
       }
     }
