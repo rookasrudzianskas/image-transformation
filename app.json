@@ -38,15 +38,6 @@
       ],
 
       "expo-font"
-    ],
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "f437e516-e636-46d3-a15b-5cd382ca3f7e"
-      }
-    },
-    "owner": "rooookas"
+    ]
   }
 }

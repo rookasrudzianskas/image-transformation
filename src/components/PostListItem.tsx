@@ -88,7 +88,7 @@ export default function PostListItem({ post }) {
       <PostContent post={post} />
 
       {/* Icons */}
-      <View className="flex-row gap-3 p-3 bg-red-500">
+      <View className="flex-row gap-3 p-3">
         <AntDesign
           onPress={() => setIsLiked(!isLiked)}
           name={isLiked ? 'heart' : 'hearto'}
@@ -104,14 +104,14 @@ export default function PostListItem({ post }) {
       <View className="px-3 gap-1">
         <Text className="font-semibold">
           {post.likes?.[0]?.count || 0} likes
-        </Text>        <Text>
+        </Text>
+        <Text>
           <Text className="font-semibold">
             {post.user.username || 'New user'}{' '}
           </Text>
           {post.caption}
         </Text>
       </View>
-
     </View>
   );
 }
