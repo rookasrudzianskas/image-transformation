@@ -16,8 +16,11 @@ export default function PostListItem({ post }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetchLike();
-  }, []);
+    if (post.my_likes.length > 0) {
+      setLikeRecord(post.my_likes[0]);
+      setIsLiked(true);
+    }
+  }, [post.my_likes]);
 
   useEffect(() => {
     if (isLiked) {
@@ -27,19 +30,19 @@ export default function PostListItem({ post }) {
     }
   }, [isLiked]);
 
-  const fetchLike = async () => {
-    const { data, error } = await supabase
-      .from('likes')
-      .select('*')
-      .eq('user_id', user?.id)
-      .eq('post_id', post.id)
-      .select();
+  // const fetchLike = async () => {
+    // const { data, error } = await supabase
+    //   .from('likes')
+    //   .select('*')
+    //   .eq('user_id', user?.id)
+    //   .eq('post_id', post.id)
+    //   .select();
 
-    if (data && data?.length > 0) {
-      setLikeRecord(data[0]);
-      setIsLiked(true);
-    }
-  };
+  //   if (data && data?.length > 0) {
+  //     setLikeRecord(data[0]);
+  //     setIsLiked(true);
+  //   }
+  // };
 
   const saveLike = async () => {
     if (likeRecord) {
@@ -97,6 +100,17 @@ export default function PostListItem({ post }) {
 
         <Feather name="bookmark" size={20} className="ml-auto" />
       </View>
+
+      <View className="px-3 gap-1">
+        <Text className="font-semibold">58 likes</Text>
+        <Text>
+          <Text className="font-semibold">
+            {post.user.username || 'New user'}{' '}
+          </Text>
+          {post.caption}
+        </Text>
+      </View>
+
     </View>
   );
 }

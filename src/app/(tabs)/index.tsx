@@ -20,8 +20,9 @@ export default function FeedScreen() {
     try {
       let { data, error } = await supabase
         .from('posts')
-        .select('*, user:profiles(*)')
-        // .eq('user_id', user?.id) // Uncomment this line to show only user's posts
+        .select('*, user:profiles(*), my_likes:likes(*)')
+        // .eq('id', 49) // show only my posts
+        .eq('my_likes.user_id', user.id)
         .order('created_at', { ascending: false });
 
       if (error) {
